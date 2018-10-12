@@ -6,27 +6,28 @@ using System.Threading.Tasks;
 
 namespace addresbook_web_tests
 {
-    class Square : Figure
+    class Circle : Figure
     {
-        private int size;
-        
+        private int radius;
+      
 
-        public Square(int size)
+        public Circle(int radius)
         {
-            this.size = size;
+            this.radius = radius;
         }
-        public int Size
+        public int Radius
         {
             get
             {
-                return size;
+                return radius;
             }
             set
             {
-                size = value;
+                radius = value;
             }
+
         }
        
     }
-
 }
+

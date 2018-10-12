@@ -47,8 +47,11 @@ namespace WebAddressbookTests
         public void GroupCreationTest()
         {
             OpenHomePage();
-            Login("admin", "secret");
-            CreationGroup("17", "18", "19");
+            Login(new AccountData("admin", "secret"));
+            GroupData group = new GroupData("ff");
+            group.Header = "fdf";
+            group.Footer = "dsfsdf";
+            CreationGroup(group);
             GroupPage();
             LogoutSystem();
         }
@@ -63,25 +66,25 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("Logout")).Click();
         }
 
-        private void CreationGroup(string group_name, string group_header, string group_footer)
+        private void CreationGroup(GroupData group)
         {
             driver.FindElement(By.Name("new")).Click();
             driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group_name);
+            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
             driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group_header);
+            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
             driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group_footer);
+            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
             driver.FindElement(By.Name("submit")).Click();
         }
 
        
-        private void Login(string username, string pass)
+        private void Login(AccountData account)
         {
             driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(username);
+            driver.FindElement(By.Name("user")).SendKeys(account.Username);
             driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(pass);
+            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
         private void OpenHomePage()
